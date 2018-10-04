@@ -5,10 +5,65 @@
   <link rel="stylesheet" type="text/css" href="main.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  
+  <script>
+            //I just copied this over from my weather lab and I haven't gotten it to work yet in this project.
+            $(document).ready(function() {
+                $("#searchBar").keyup(function() {
+                    var url = "http://www.omdbapi.com/?apikey=ccca790f&t=" + $("#searchBar").val(); 
+                    $.getJSON(url, function(data) {
+                        var everything;
+                        everything = "<ul>";
+                        $.each(data, function(i, item) {
+                            everything += "<li> " + data[i].title;
+                        });
+                        everything += "</ul>";
+                        $("#txtHint").html(everything);
+                    })
+                        .done(function() { console.log('getJSON request succeeded!'); })
+                        .fail(function(jqXHR, textStatus, errorThrown) {
+                        console.log('getJSON request failed! ' + textStatus);
+                        console.log("incoming " + jqXHR.responseText);
+                    })
+                        .always(function() {
+                        console.log('getJSON request ended!');
+                    });
+                });
+            });
+            
+            //I haven't finished this quite either.
+            var value = "";
+            var myurl = "http://www.omdbapi.com/?apikey=ccca790f&t=${value}&plot=full";
+            console.log(myurl);
+            $.ajax({
+                url: myurl,
+                dataType: "json",
+                success: function(parsed_json) {
+                    console.log(parsed_json);
+                    var title = parsed_json['Title'];
+                    var year = parsed_json['Year'];
+                    var rating = parsed_json['Rated'];
+                    var releaseDate = parsed_json['Released'];
+                    var genre = parsed_json['Genre'];
+                    var director = parsed_json['Director'];
+                    var actors = parsed_json['actors'];
+                    var plot = parsed_json['Plot'];
+                    var awards = parsed_json['Awards'];
+                    var poster = parsed_json['Poster'];
+                }
+            )}
+ </script>
  </head>
  <body>
- 
+ <form>
+  Type in a Movie:
+  <br>
+  <input type="text" id="searchBar" value = "">
+  <br>
+  Suggestion: 
+  <span id="txtHint"></span>
+  <br>
+  <input id = "submitButton" type ="submit" value="Submit">
+ </form>
  <h1 id="Title" class="centeredText"></h2>
  <div class="container">
   <div class="row">
