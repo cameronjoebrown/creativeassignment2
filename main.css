@@ -1,0 +1,30 @@
+.centeredText {
+  text-align: center;
+}
+
+h1{
+    padding: 15px 15px 15px 15px;
+}
+
+h2{
+    font-variant: small-caps;
+    font-weight: bold;
+}
+
+h3{
+    text-indent: 5%;
+}
+
+div{
+    padding: 5px 10px 5px 10px;
+}
+
+img{
+       border:1px solid #021a40;
+}
+
+body {
+    background-image: url("https://www.desktopbackground.org/p/2010/08/02/57980_theater-backgrounds_1600x1051_h.jpg");
+    background-size: cover;
+    font-family: Georgia;
+}
