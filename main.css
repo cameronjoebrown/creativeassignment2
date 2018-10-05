@@ -28,3 +28,13 @@ body {
     background-size: cover;
     font-family: Georgia;
 }
+.row {
+    background-color: #DDDDDD;
+}
+
+input, textarea {
+    background-color: silver;
+    border: silver;
+    border-style: inset;
+    border-width: 3px;
+}
