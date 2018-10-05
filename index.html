@@ -32,7 +32,7 @@
                     $("#Actors").html("<b>Actors:</b> " + parsed_json['Actors']);
                     $("#Plot").html(parsed_json['Plot']);
                     $("#awards").html("<b>Awards: </b>" + parsed_json['Awards']);
-                    $("#Poster").html(`<img src="${parsed_json['Poster']}">`);
+                    $("#Poster").html(`<img src="${parsed_json['Poster']}" style="max-width:300px;width:100%">`);
                 }
             });
           }
@@ -45,7 +45,7 @@
   <input class="btn" id="movieButton" type="submit" value="Search">
 </form>
  
- <div class="container panel panel-default">
+ <div class="container-fluid panel panel-default" style="width:80%">
   <div class="row panel-body">
    <div class="col-sm-4">
     <div id="Poster"></div>
