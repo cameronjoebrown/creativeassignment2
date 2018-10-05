@@ -40,19 +40,19 @@
  </script>
  </head>
  <body>
- <form>
-  Enter A Movie:<br><input type="text" id="movieField" value="">
-  <input class="btn" id="movieButton" type="submit" value="Submit">
+ <form style="text-align:center">
+  <input type="text" id="movieField" value="" style="width:40%;margin-top:20px;margin-bottom:20px" placeholder="Search any movie or tv show">
+  <input class="btn" id="movieButton" type="submit" value="Search">
 </form>
  
- <h1 id="Title" class="centeredText"></h2>
- <div class="container">
-  <div class="row">
+ <div class="container panel panel-default">
+  <div class="row panel-body">
    <div class="col-sm-4">
     <div id="Poster"></div>
    </div>
    
    <div class="col-sm-8">
+    <h1 id="Title" class="centeredText"></h2>
     <h4 id="release">Release Date:</h4>
     <hr>
     <h4 id="genre">Genre:</h4>
