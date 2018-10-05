@@ -6,64 +6,45 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script>
-            //I just copied this over from my weather lab and I haven't gotten it to work yet in this project.
-            $(document).ready(function() {
-                $("#searchBar").keyup(function() {
-                    var url = "http://www.omdbapi.com/?apikey=ccca790f&t=" + $("#searchBar").val(); 
-                    $.getJSON(url, function(data) {
-                        var everything;
-                        everything = "<ul>";
-                        $.each(data, function(i, item) {
-                            everything += "<li> " + data[i].title;
-                        });
-                        everything += "</ul>";
-                        $("#txtHint").html(everything);
-                    })
-                        .done(function() { console.log('getJSON request succeeded!'); })
-                        .fail(function(jqXHR, textStatus, errorThrown) {
-                        console.log('getJSON request failed! ' + textStatus);
-                        console.log("incoming " + jqXHR.responseText);
-                    })
-                        .always(function() {
-                        console.log('getJSON request ended!');
-                    });
-                });
-            });
-            
-            //I haven't finished this quite either.
-            var value = "";
-            var myurl = "http://www.omdbapi.com/?apikey=ccca790f&t=${value}&plot=full";
+          $(document).ready(function() {
+           apiCall("Creed");
+           $("#movieButton").click(function(e){
+            e.preventDefault();
+            var value = $("#movieField").val();
+            apiCall(value);
+          });
+          });
+          
+          function apiCall(title) {
+   
+            var myurl = `http://www.omdbapi.com/?apikey=ccca790f&t=${title}&plot=full`;
             console.log(myurl);
             $.ajax({
                 url: myurl,
                 dataType: "json",
                 success: function(parsed_json) {
                     console.log(parsed_json);
-                    var title = parsed_json['Title'];
-                    var year = parsed_json['Year'];
+                    $("#Title").html(parsed_json['Title'] + " (" + parsed_json.Year + ")");
                     var rating = parsed_json['Rated'];
-                    var releaseDate = parsed_json['Released'];
-                    var genre = parsed_json['Genre'];
-                    var director = parsed_json['Director'];
-                    var actors = parsed_json['actors'];
-                    var plot = parsed_json['Plot'];
-                    var awards = parsed_json['Awards'];
-                    var poster = parsed_json['Poster'];
+                    $("#release").html("<b>Release Date:</b> " + parsed_json['Released']);
+                    $("#genre").html("<b>Genre:</b> " + parsed_json['Genre']);
+                    $("#director").html("<b>Direcor:</b> " + parsed_json['Director']);
+                    $("#Actors").html("<b>Actors:</b> " + parsed_json['Actors']);
+                    $("#Plot").html(parsed_json['Plot']);
+                    $("#awards").html("<b>Awards: </b>" + parsed_json['Awards']);
+                    $("#Poster").html(`<img src="${parsed_json['Poster']}">`);
                 }
-            )}
+            });
+          }
+    
  </script>
  </head>
  <body>
  <form>
-  Type in a Movie:
-  <br>
-  <input type="text" id="searchBar" value = "">
-  <br>
-  Suggestion: 
-  <span id="txtHint"></span>
-  <br>
-  <input id = "submitButton" type ="submit" value="Submit">
- </form>
+  Enter A Movie:<br><input type="text" id="movieField" value="">
+  <input class="btn" id="movieButton" type="submit" value="Submit">
+</form>
+ 
  <h1 id="Title" class="centeredText"></h2>
  <div class="container">
   <div class="row">
@@ -72,7 +53,7 @@
    </div>
    
    <div class="col-sm-8">
-    <h4>Release Date:</h4>
+    <h4 id="release">Release Date:</h4>
     <hr>
     <h4 id="genre">Genre:</h4>
     <hr>
@@ -86,7 +67,8 @@
   
   <div class="row">
    <div class="col-sm-12">
-    <h4 id="Plot">Plot: </h4>
+    <h4><b>Plot: </b></h4>
+    <p id="Plot">Plot: </p>
    </div>
   </div>
  </div>
